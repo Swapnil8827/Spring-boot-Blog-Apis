@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +23,7 @@ public class CategoryController {
     CategoryService categoryService;
 
     @PostMapping("")
-    public ResponseEntity<ApiResponse> createCategory(@RequestBody CategoryDto categoryDto){
+    public ResponseEntity<ApiResponse> createCategory(@RequestBody CategoryDto categoryDto) {
 
         categoryService.createCategory(categoryDto);
 
@@ -31,35 +32,40 @@ public class CategoryController {
     }
 
     @PutMapping("/{categoryId}")
-    public ResponseEntity<CategoryDto> updateCategory(@RequestBody CategoryDto categoryDto,@PathVariable Integer categoryId){
+    public ResponseEntity<CategoryDto> updateCategory(@RequestBody CategoryDto categoryDto, @PathVariable Integer categoryId) {
 
         categoryService.updateCategory(categoryDto, categoryId);
 
-        return  ResponseEntity.ok(categoryDto);
+        return ResponseEntity.ok(categoryDto);
 
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryDto> getSingleCategory(@PathVariable Integer id ){
+    public ResponseEntity<CategoryDto> getSingleCategory(@PathVariable Integer id) {
 
         CategoryDto categoryDto = categoryService.getCategoryById(id);
 
         return ResponseEntity.ok(categoryDto);
 
     }
+
     @GetMapping("")
-    public ResponseEntity<Map<String, List<CategoryDto>>> getAllCategories(){
+    public ResponseEntity<Map<String, List<CategoryDto>>> getAllCategories() {
 
         List<CategoryDto> categoryDtos = categoryService.getAllCategory();
 
-        return ResponseEntity.ok(Map.of("categories", categoryDtos));
+        Map<String, List<CategoryDto>> map = new HashMap<>();
+        map.put("categories", categoryDtos);
+
+        return ResponseEntity.ok(map);
 
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteCategory(@PathVariable Integer id){
+    public ResponseEntity<ApiResponse> deleteCategory(@PathVariable Integer id) {
 
         categoryService.deleteCategory(id);
 
-        return  ResponseEntity.ok(new ApiResponse("Category Deleted Successfully", true));
+        return ResponseEntity.ok(new ApiResponse("Category Deleted Successfully", true));
     }
 }
