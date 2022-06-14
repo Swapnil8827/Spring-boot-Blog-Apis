@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -89,7 +90,10 @@ public class PostController {
 
         List<PostDto> allPost = this.postService.getPostByUser(userId);
 
-        return ResponseEntity.ok(Map.of("posts", allPost));
+        Map<String, List<PostDto>> map = new HashMap<>();
+        map.put("posts", allPost);
+
+        return ResponseEntity.ok(map);
     }
 
     @GetMapping("/category/{categoryId}/posts")
@@ -97,7 +101,10 @@ public class PostController {
 
         List<PostDto> allPost = this.postService.getPostByCategory(categoryId);
 
-        return ResponseEntity.ok(Map.of("posts", allPost));
+        Map<String, List<PostDto>> map = new HashMap<>();
+        map.put("posts", allPost);
+
+        return ResponseEntity.ok(map);
     }
 
 
@@ -114,7 +121,10 @@ public class PostController {
 
         List<PostDto> posts = postService.getPostByKeyWords("%" + keywords + "%");
 
-        return ResponseEntity.ok(Map.of("posts", posts));
+        Map<String, List<PostDto>> map = new HashMap<>();
+        map.put("posts", posts);
+
+        return ResponseEntity.ok(map);
     }
 
     @GetMapping(value="/post/image/{imageName}",produces= MediaType.IMAGE_JPEG_VALUE)

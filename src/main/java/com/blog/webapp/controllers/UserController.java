@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +45,10 @@ public class UserController {
     @GetMapping("")
     public ResponseEntity<Map<String,List<UserDto>>> getAllUsers(){
 
-        return ResponseEntity.ok(Map.of("users",userService.getAllUsers()));
+        Map<String,List<UserDto>> map = new HashMap<>();
+        map.put("users",userService.getAllUsers());
+
+        return ResponseEntity.ok(map);
     }
 
     @GetMapping("/{userId}")
