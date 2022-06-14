@@ -49,7 +49,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto getCategoryById(Integer categoryId) {
 
-        var category = categoryDao
+        Category category = categoryDao
                 .findById(categoryId)
                 .orElseThrow(()->new ResourceNotFoundException("Category", "category Id", categoryId));
 

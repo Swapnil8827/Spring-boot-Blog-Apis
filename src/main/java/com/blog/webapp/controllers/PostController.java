@@ -78,7 +78,7 @@ public class PostController {
             sortBy = "id";
         }
 
-        var postResponse = this.postService.getAllPost(pageNumber, pageSize, sortBy);
+        PostResponse postResponse = this.postService.getAllPost(pageNumber, pageSize, sortBy);
 
 
         return ResponseEntity.ok(postResponse);

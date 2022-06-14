@@ -12,6 +12,7 @@ import com.blog.webapp.payloads.PostResponse;
 import com.blog.webapp.services.PostService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -70,8 +71,8 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostResponse getAllPost(Integer pageNumber, Integer pageSize, String sortBy) {
 
-        var pageable = PageRequest.of(pageNumber,pageSize, Sort.by(sortBy));
-        var page = this.postDao.findAll(pageable);
+        PageRequest pageable = PageRequest.of(pageNumber,pageSize, Sort.by(sortBy));
+        Page<Post> page = this.postDao.findAll(pageable);
         List<Post> posts = page.getContent();
 
 
