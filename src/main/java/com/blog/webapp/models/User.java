@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class User implements UserDetails {
@@ -68,7 +69,7 @@ public class User implements UserDetails {
         return this.roles
                 .stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRole()))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public String getPassword() {

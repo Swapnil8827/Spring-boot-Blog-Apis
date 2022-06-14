@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.awt.print.Pageable;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -76,7 +77,7 @@ public class PostServiceImpl implements PostService {
 
         List<PostDto> postDtos = posts.stream()
                 .map(post ->  this.modelMapper.map(post, PostDto.class))
-                .toList();
+                .collect(Collectors.toList());
 
         PostResponse postResponse = new PostResponse();
 
@@ -98,7 +99,7 @@ public class PostServiceImpl implements PostService {
 
         List<PostDto> postDtos = posts.stream()
                 .map(post ->  this.modelMapper.map(post, PostDto.class))
-                .toList();
+                .collect(Collectors.toList());
 
 
         return postDtos;
@@ -113,7 +114,7 @@ public class PostServiceImpl implements PostService {
 
         List<PostDto> postDtos = posts.stream()
                 .map(post ->  this.modelMapper.map(post, PostDto.class))
-                .toList();
+                .collect(Collectors.toList());
 
 
         return postDtos;
@@ -124,7 +125,7 @@ public class PostServiceImpl implements PostService {
 
         List<Post> posts = postDao.getPostsByKeywords(keyword);
 
-        List<PostDto> postDtos = posts.stream().map(post -> modelMapper.map(post, PostDto.class)).toList();
+        List<PostDto> postDtos = posts.stream().map(post -> modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
 
         return postDtos;
     }
