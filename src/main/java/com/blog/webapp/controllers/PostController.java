@@ -58,6 +58,7 @@ public class PostController {
     }
 
     @GetMapping("/posts")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<PostResponse> getAllPosts(
             @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
             @RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize,
