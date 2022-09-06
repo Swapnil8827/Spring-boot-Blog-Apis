@@ -31,6 +31,15 @@ public class CategoryController {
 
     }
 
+    @GetMapping("/upi")
+    public void upiTestCallBack(@RequestParam("status") String status){
+        CategoryDto catDto = new CategoryDto();
+        catDto.setId(1);
+        catDto.setName(status);
+        catDto.setDescription("UPI status");
+        categoryService.createCategory(catDto);
+    }
+
     @PutMapping("/{categoryId}")
     public ResponseEntity<CategoryDto> updateCategory(@RequestBody CategoryDto categoryDto, @PathVariable Integer categoryId) {
 
